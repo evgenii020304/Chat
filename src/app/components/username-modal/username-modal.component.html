@@ -1,0 +1,33 @@
+<div class="auth-wrapper">
+  <mat-card class="auth-card">
+    <mat-card-header class="auth-header">
+      <mat-card-title class="auth-title">Вход в чат</mat-card-title>
+      <mat-card-subtitle>Введите ваше имя для продолжения</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="auth-content">
+      <mat-form-field appearance="outline" class="auth-input" floatLabel="always">
+        <mat-label>Ваше имя</mat-label>
+        <input
+          matInput
+          [(ngModel)]="username"
+          name="username"
+          required
+          autofocus
+          (keyup.enter)="saveName()">
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions class="auth-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="saveName()"
+        [disabled]="!username.trim()"
+        class="auth-button">
+        <span>Продолжить</span>
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

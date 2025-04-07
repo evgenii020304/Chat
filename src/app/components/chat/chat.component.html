@@ -1,0 +1,48 @@
+<div class="chat-wrapper">
+  <div class="chat-container">
+    @if (!username) {
+      <app-username-modal (usernameSet)="setUsername($event)"></app-username-modal>
+    } @else {
+      <div class="chat-header">
+        <h2>Чат</h2>
+        <div class="user-info">
+          <span>{{ username }}</span>
+          <button mat-icon-button (click)="changeName()" matTooltip="Сменить пользователя">
+            <mat-icon>logout</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <div class="messages-container" #messagesContainer>
+        @for (message of messages; track message.id) {
+          <div class="message" [class.system]="message.isSystem">
+            <div class="message-header">
+              <span class="author">{{ message.author }}</span>
+              <span class="timestamp">{{ message.timestamp | date:'HH:mm' }}</span>
+            </div>
+            <div class="message-content">{{ message.text }}</div>
+          </div>
+        }
+      </div>
+
+      <div class="input-container">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Ваше сообщение</mat-label>
+          <input
+            matInput
+            [(ngModel)]="messageText"
+            (keyup.enter)="sendMessage()"
+            class="white-text">
+          <button
+            mat-icon-button
+            matSuffix
+            color="primary"
+            (click)="sendMessage()"
+            [disabled]="!messageText.trim()">
+            <mat-icon>send</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+    }
+  </div>
+</div>
